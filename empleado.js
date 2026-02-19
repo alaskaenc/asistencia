@@ -1,4 +1,4 @@
-const URL = "https://script.google.com/macros/s/AKfycbw5xaqx9MOda9BZSAV1ou2rW3-MekG9Afa8kpiQZ77Cj4dY_S9XdXGNe-npXNksoG1upw/exec";
+const URL = "https://script.google.com/macros/s/AKfycbw3g8drFAWBp0jOXRZQ_ytMEu2mQN7NO8KgwzJeUkiFb9adK-Ny8FZdfQxxTyCTz939IA/exec";
 
 function marcar(tipo) {
     const ci = document.getElementById("ci").value.trim();
@@ -8,47 +8,35 @@ function marcar(tipo) {
     }
 
     const now = new Date();
-    const data = {
-        ci: ci,
-        tipo: tipo,
-        fecha: now.toISOString().split("T")[0],
-        hora: now.toLocaleTimeString("es-PY"),
-        dispositivo: navigator.userAgent
-    };
+
+    // ← Enviamos como formulario (evita problemas de parseo)
+    const formData = new URLSearchParams();
+    formData.append("ci", ci);
+    formData.append("tipo", tipo);
+    formData.append("fecha", now.toISOString().split("T")[0]);
+    formData.append("hora", now.toLocaleTimeString("es-PY"));
+    formData.append("dispositivo", navigator.userAgent);
 
     fetch(URL, {
         method: "POST",
-        mode: "cors",
-        redirect: "follow",
-        headers: {
-            "Content-Type": "text/plain;charset=UTF-8"  // ← Esto evita el preflight
-        },
-        body: JSON.stringify(data)  // ← Envía JSON pero como texto plano
+        body: formData  // ← sin headers Content-Type (el navegador lo pone solo)
     })
-    .then(res => {
-        if (!res.ok) {
-            throw new Error(`Status: ${res.status}`);
-        }
-        return res.text();
-    })
+    .then(res => res.text())
     .then(text => {
-        console.log("Respuesta cruda del servidor:", text);  // ← Para debug en consola
+        console.log("Respuesta del servidor:", text); // ← para ver en consola
         try {
             const resp = JSON.parse(text);
             if (resp.ok) {
-                alert("Registro exitoso");
+                alert("¡Registro exitoso!");
                 document.getElementById("ci").value = "";
-            } else if (resp.error) {
-                alert("Error: " + resp.error);
             } else {
-                alert("Respuesta extraña: " + text);
+                alert("Error: " + (resp.error || "Respuesta desconocida"));
             }
         } catch (e) {
-            alert("El servidor no devolvió JSON válido: " + text);
+            alert("Problema con la respuesta: " + text);
         }
     })
     .catch(err => {
-        console.error("Error completo:", err);
-        alert("No se pudo conectar con el servidor.\n" + err.message);
+        alert("Error de conexión: " + err.message);
     });
 }
