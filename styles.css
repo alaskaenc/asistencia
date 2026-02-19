@@ -1,32 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f1f1f1;
+  font-family: 'Roboto', Arial, sans-serif;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bfdbfe 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #1e293b;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
 }
 
 .card {
-  max-width: 350px;
-  margin: 100px auto;
-  padding: 20px;
   background: white;
-  border-radius: 10px;
+  border-radius: 16px;
+  padding: 2rem 1.8rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
   text-align: center;
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+h2 {
+  color: #1e40af;
+  font-size: 1.6rem;
+  margin-bottom: 1.8rem;
+  font-weight: 700;
 }
 
-button {
+.input-wrapper {
+  margin-bottom: 1.8rem;
+}
+
+input[type="text"] {
   width: 100%;
-  padding: 12px;
-  margin: 5px 0;
+  padding: 14px 16px;
+  font-size: 1.1rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.25s ease;
+  background: #f8fafc;
+}
+
+input[type="text"]:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+  background: white;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
   border: none;
-  color: white;
-  font-size: 16px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all 0.25s ease;
+  min-width: 140px;
+  color: white;
 }
 
-.entrada { background: green; }
-.salida { background: red; }
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-entrada {
+  background: #10b981;  /* verde esmeralda */
+}
+
+.btn-entrada:hover {
+  background: #059669;
+}
+
+.btn-salida {
+  background: #ef4444;  /* rojo alerta */
+}
+
+.btn-salida:hover {
+  background: #dc2626;
+}
+
+/* Responsive - para celulares pequeños */
+@media (max-width: 480px) {
+  .card {
+    padding: 1.6rem 1.4rem;
+  }
+  
+  h2 {
+    font-size: 1.45rem;
+  }
+  
+  .btn {
+    padding: 12px 28px;
+    font-size: 1rem;
+    min-width: 130px;
+  }
+}
