@@ -44,3 +44,4 @@ function marcar(tipo) {
         alert("Error de conexión: " + error.message);
     });
 }
+
