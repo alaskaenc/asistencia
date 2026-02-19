@@ -1,0 +1,32 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f1f1f1;
+}
+
+.card {
+  max-width: 350px;
+  margin: 100px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin: 5px 0;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.entrada { background: green; }
+.salida { background: red; }

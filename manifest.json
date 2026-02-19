@@ -1,0 +1,8 @@
+{
+  "name": "Registro de Asistencia",
+  "short_name": "Asistencia",
+  "start_url": "/empleado.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000"
+}
