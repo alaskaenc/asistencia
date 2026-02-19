@@ -1,4 +1,4 @@
-const URL = "PEGAR_AQUI_TU_URL";
+const URL = "https://script.google.com/macros/s/AKfycbynIZqS-fkR-mLMMPpFvIK2m1taBb8OxUCQEeE9ZYKCpttmcuWZMlheglBZErqeYNegRw/exec";
 
 function marcar(tipo) {
   const ci = document.getElementById("ci").value.trim();
@@ -32,3 +32,4 @@ function marcar(tipo) {
   })
   .catch(() => alert("Error de conexión"));
 }
+
