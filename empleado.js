@@ -17,19 +17,28 @@ function marcar(tipo) {
     dispositivo: navigator.userAgent
   };
 
-  fetch(URL, {
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-  .then(res => res.json())
-  .then(resp => {
-    if (resp.error) {
-      alert(resp.error);
-    } else {
-      alert("Registro exitoso");
-      document.getElementById("ci").value = "";
+fetch(URL, {
+  method: "POST",
+  body: JSON.stringify(data)
+})
+.then(res => res.text())  // cambiamos a text() para ver todo
+.then(text => {
+    try {
+        const resp = JSON.parse(text);
+        if (resp.error) {
+            alert("Error: " + resp.error);
+        } else if (resp.ok) {
+            alert("Registro exitoso");
+            document.getElementById("ci").value = "";
+        } else {
+            alert("Respuesta desconocida: " + text);
+        }
+    } catch(e) {
+        alert("Error al procesar la respuesta: " + text);
     }
-  })
-  .catch(() => alert("Error de conexión"));
-}
+})
+.catch(err => {
+    alert("Error de conexión: " + err);
+});
+
 
