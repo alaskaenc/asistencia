@@ -1,4 +1,4 @@
-const URL = "https://script.google.com/macros/s/AKfycbzSkKNhEJex2nSunrRx7IkrKcHsO-bddhqolYFvFPw0yhggXVkeeKtQv2Qigwd_9j3c5A/exec";
+const URL = "https://script.google.com/macros/s/AKfycbzitdsffJe9itFQ4QfNFjAMjmkl-gl6Ny9Ytuz_yUUaxqFoNI8pKZCkgE5nRIRJWfsQWA/exec";
 
 // Función para mostrar toast
 function showToast(message, type = 'success') {
@@ -69,3 +69,4 @@ function marcar(tipo) {
         showToast("Error de conexión: " + error.message, 'error');
     });
 }
+
