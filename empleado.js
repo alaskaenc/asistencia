@@ -1,4 +1,4 @@
-const URL = "https://script.google.com/macros/s/AKfycbw4u7bKEOkVe9AXvx4wFtBqIDtOXWdYdXLh6-YhNmyd-kAJgF2-gieN9yoz4qP5w4zY2Q/exec";  // actualiza si cambiaste el despliegue
+const URL = "https://script.google.com/macros/s/AKfycbwrIe29FTZbJZXBk43x1_HO5tHH-84gl0IiBKpZenrQi0mxDcO9JNytqRUkCOvTPsljUQ/exec";  // actualiza si cambiaste el despliegue
 
 function marcar(tipo) {
     const ci = document.getElementById("ci").value.trim();
@@ -44,4 +44,5 @@ function marcar(tipo) {
         alert("Error de conexión: " + error.message);
     });
 }
+
 
