@@ -121,3 +121,47 @@ input::placeholder {
     min-width: 130px;
   }
 }
+/* Toast notification */
+#toast-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.toast {
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 12px;
+  margin: 10px auto;
+  max-width: 90%;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.success {
+  background: #10b981;  /* verde éxito */
+}
+
+.toast.error {
+  background: #ef4444;  /* rojo error */
+}
+
+.toast i {
+  font-size: 1.3rem;
+}
