@@ -1,4 +1,4 @@
-const URL = "https://script.google.com/macros/s/AKfycbynIZqS-fkR-mLMMPpFvIK2m1taBb8OxUCQEeE9ZYKCpttmcuWZMlheglBZErqeYNegRw/exec";
+const URL = "https://script.google.com/macros/s/AKfycbw5xaqx9MOda9BZSAV1ou2rW3-MekG9Afa8kpiQZ77Cj4dY_S9XdXGNe-npXNksoG1upw/exec";
 
 function marcar(tipo) {
     const ci = document.getElementById("ci").value.trim();
@@ -54,3 +54,4 @@ function marcar(tipo) {
         alert("No se pudo conectar con el servidor.\n" + error.message);
     });
 }
+
