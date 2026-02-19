@@ -2,44 +2,55 @@ const URL = "https://script.google.com/macros/s/AKfycbynIZqS-fkR-mLMMPpFvIK2m1ta
 
 function marcar(tipo) {
     const ci = document.getElementById("ci").value.trim();
+    
     if (!ci) {
-        alert("Ingrese su CI");
+        alert("Por favor, ingrese su CI");
         return;
     }
 
     const now = new Date();
-    const data = {
+    
+    // Datos como form-urlencoded (evita OPTIONS preflight)
+    const params = new URLSearchParams({
         ci: ci,
         tipo: tipo,
         fecha: now.toISOString().split("T")[0],
-        hora: now.toLocaleTimeString(),
+        hora: now.toLocaleTimeString("es-PY"), // o tu zona horaria
         dispositivo: navigator.userAgent
-    };
+    });
 
     fetch(URL, {
         method: "POST",
+        mode: "cors",
+        redirect: "follow",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: JSON.stringify(data)
+        body: params.toString()
     })
-    .then(res => res.text())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+    })
     .then(text => {
         try {
-            const resp = JSON.parse(text);
-            if (resp.error) {
-                alert("Error: " + resp.error);
-            } else if (resp.ok) {
-                alert("Registro exitoso");
+            const data = JSON.parse(text);
+            if (data.ok) {
+                alert("Registro exitoso ✓");
                 document.getElementById("ci").value = "";
+            } else if (data.error) {
+                alert("Error: " + data.error);
             } else {
-                alert("Respuesta desconocida: " + text);
+                alert("Respuesta inesperada del servidor:\n" + text);
             }
         } catch (e) {
-            alert("Error al procesar la respuesta:\n" + text);
+            alert("El servidor respondió algo no válido:\n" + text);
         }
     })
-    .catch(err => {
-        alert("Error de conexión: " + err.message);
+    .catch(error => {
+        console.error("Error completo:", error);
+        alert("No se pudo conectar con el servidor.\n" + error.message);
     });
 }
