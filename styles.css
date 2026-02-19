@@ -168,4 +168,24 @@ input::placeholder {
 .toast i {
   font-size: 1.4rem;
 }
+/* Logo de Alaska Fashion */
+.logo {
+  display: block;
+  margin: 0 auto 1.8rem auto;     /* centrado y espacio debajo */
+  max-width: 220px;               /* tamaño recomendado para empezar */
+  height: auto;
+  border-radius: 12px;            /* bordes suaves */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);  /* sombra sutil */
+  background: white;              /* fondo blanco para resaltar el logo negro */
+  padding: 12px;                  /* espacio interno alrededor del logo */
+}
+
+/* Ajuste en móviles */
+@media (max-width: 480px) {
+  .logo {
+    max-width: 160px;
+    padding: 10px;
+    margin-bottom: 1.4rem;
+  }
+}
 
