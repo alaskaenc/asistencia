@@ -1,15 +1,15 @@
-const URL = "https://script.google.com/macros/s/AKfycbw3g8drFAWBp0jOXRZQ_ytMEu2mQN7NO8KgwzJeUkiFb9adK-Ny8FZdfQxxTyCTz939IA/exec";
+const URL = "https://script.google.com/macros/s/AKfycbw4u7bKEOkVe9AXvx4wFtBqIDtOXWdYdXLh6-YhNmyd-kAJgF2-gieN9yoz4qP5w4zY2Q/exec";  // actualiza si cambiaste el despliegue
 
 function marcar(tipo) {
     const ci = document.getElementById("ci").value.trim();
+    
     if (!ci) {
-        alert("Ingrese su CI");
+        alert("Por favor ingrese su CI");
         return;
     }
 
     const now = new Date();
 
-    // ← Enviamos como formulario (evita problemas de parseo)
     const formData = new URLSearchParams();
     formData.append("ci", ci);
     formData.append("tipo", tipo);
@@ -17,26 +17,30 @@ function marcar(tipo) {
     formData.append("hora", now.toLocaleTimeString("es-PY"));
     formData.append("dispositivo", navigator.userAgent);
 
+    // Debug: mira en consola qué se envía
+    console.log("Enviando:", Object.fromEntries(formData));
+
     fetch(URL, {
         method: "POST",
-        body: formData  // ← sin headers Content-Type (el navegador lo pone solo)
+        body: formData  // ← navegador pone automáticamente el Content-Type correcto
     })
-    .then(res => res.text())
+    .then(response => response.text())
     .then(text => {
-        console.log("Respuesta del servidor:", text); // ← para ver en consola
+        console.log("Respuesta cruda:", text);
         try {
-            const resp = JSON.parse(text);
-            if (resp.ok) {
-                alert("¡Registro exitoso!");
+            const data = JSON.parse(text);
+            if (data.ok) {
+                alert("Registro guardado exitosamente");
                 document.getElementById("ci").value = "";
             } else {
-                alert("Error: " + (resp.error || "Respuesta desconocida"));
+                alert("Error: " + (data.error || "Respuesta inesperada"));
             }
-        } catch (e) {
-            alert("Problema con la respuesta: " + text);
+        } catch (err) {
+            alert("Error al procesar respuesta: " + text);
         }
     })
-    .catch(err => {
-        alert("Error de conexión: " + err.message);
+    .catch(error => {
+        console.error("Fetch error:", error);
+        alert("Error de conexión: " + error.message);
     });
 }
